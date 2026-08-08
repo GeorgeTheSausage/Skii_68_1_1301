@@ -12,7 +12,7 @@ public class Tree : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -26,9 +26,17 @@ public class Tree : MonoBehaviour
             return;
         }
 
+
         player.HP -= 15;
         UIMananger.instance.ShowNotiText($"Ouch -15\nHP: {player.HP}");
 
+
+        if (player.HP <= 0)
+        {
+            UIMananger.instance.ShowNotiText($"Ouch -15\nHP:0");
+            Time.timeScale = 0;
+            UIMananger.instance.ShowHideRestartButton(true);
+        }
     }
 
     private void OnCollisionExit(Collision collision)
